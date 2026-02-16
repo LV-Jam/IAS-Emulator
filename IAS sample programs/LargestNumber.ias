@@ -1,0 +1,43 @@
+LOAD M(X) 30; ADD M(X) 31;
+SUB M(X) 20; STOR M(X) 32;
+LOAD M(X) 32; SUB M(X) 31;
+JUMP+ M(X,20:39) 4; STOR M(X) 21; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1       // Constant 1
+0       // place where highest value is stored, initially 0
+
+
+
+
+
+
+
+
+4       // n
+40      // Address of first element in the set
+0       // Address of last element in the set: n + 40 - 1
+
+
+
+
+
+
+
+5
+2
+3
+6
