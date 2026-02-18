@@ -1,8 +1,11 @@
+package com.architecture;
+
+import com.architecture.Instruction.InstructionFactory;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,6 +13,8 @@ public class Main {
             System.err.println("missing file name");
             System.exit(1);
         }
+
+        InstructionFactory instructionFactory = InstructionFactory.getInstance();
 
         for (String s : readFile(args[0])) {
             System.out.println(s);
