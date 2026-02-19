@@ -1,0 +1,23 @@
+LOAD -M(20)    ; ADD M(21)    
+JUMP+ M(9,0:19); LOAD M(22)
+ADD M(23)      ; STOR M(23)  
+LOAD M(23)     ; SUB M(22)
+STOR M(22)     ; LOAD M(21)   
+ADD M(10)      ; STOR M(21)  
+JUMP M(0,20:39)
+
+
+1  
+
+
+
+
+
+
+
+
+
+10000000 
+0  
+0  
+1 

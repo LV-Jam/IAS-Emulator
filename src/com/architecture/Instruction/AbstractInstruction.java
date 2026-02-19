@@ -1,7 +1,6 @@
 package com.architecture.Instruction;
 
 
-import com.architecture.CPU.CPU;
 import com.architecture.Nullable;
 
 public abstract class AbstractInstruction {
@@ -19,5 +18,22 @@ public abstract class AbstractInstruction {
         this.address.setValue(new Address(address));
     }
 
-    public abstract void execute(CPU cpu);
+    public abstract void execute();
+
+    @Override
+    public String toString() {
+        if (address.hasValue()) {
+            return String.format(
+                    "(%s, %d)",
+                    this.getClass().getSimpleName(),
+                    address.getValue().getValue()
+            );
+        } else {
+            return String.format(
+                    "(%s)",
+                    this.getClass().getSimpleName()
+            );
+        }
+
+    }
 }

@@ -10,7 +10,12 @@ public final class JUMP_M_X_L extends AbstractInstruction {
     }
 
     @Override
-    public void execute(CPU cpu) {
-
+    public void execute() {
+        if (getAddress() == null) {
+            throw new IllegalStateException("Address is null for JUMP_M_X_L");
+        }
+        CPU cpu = CPU.getInstance();
+        cpu.PC = getAddress().getValue();
+        cpu.IBR = null; //clearing IBR to force load full word
     }
 }

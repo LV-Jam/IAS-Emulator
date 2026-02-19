@@ -19,11 +19,15 @@ public class RAM {
     public static final short MEMORY_SIZE = 4096;
     public Word[] memory;
 
-    public void setAddress(Address address, Word word) {
-        memory[address.get()] = word;
+    public void set(Address address, Word word) {
+        memory[address.getValue()] = word;
     }
 
-    public Word getAddress(Address address) {
-        return memory[address.get()];
+    public Word get(Address address) {
+        return memory[address.getValue()];
+    }
+
+    public Word[] getArray() {
+        return memory;
     }
 }

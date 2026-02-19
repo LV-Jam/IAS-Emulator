@@ -2,16 +2,21 @@ package com.architecture.Instruction.Instructions;
 
 import com.architecture.CPU.CPU;
 import com.architecture.Instruction.AbstractInstruction;
-import com.architecture.Instruction.Symbolic;
+import com.architecture.RAM.RAM;
 
-public final class _ extends AbstractInstruction {
-    public _(short address) {
+public final class LOAD_MQ_M_X extends AbstractInstruction {
+    public LOAD_MQ_M_X(short address) {
         super();
         setAddress(address);
     }
 
     @Override
-    public void execute(CPU cpu) {
-
+    public void execute() {
+        if (getAddress() == null) {
+            throw new IllegalStateException("Address is null for LOAD_MQ_M_X");
+        }
+        CPU cpu = CPU.getInstance();
+        RAM ram = RAM.getInstance();
+        cpu.MQ = ram.get(this.getAddress()).getValue();
     }
 }

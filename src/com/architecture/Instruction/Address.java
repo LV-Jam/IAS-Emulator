@@ -1,22 +1,35 @@
 package com.architecture.Instruction;
 
+import com.architecture.RAM.RAM;
+
+import static com.architecture.Globals.MASK12;
+
 public class Address {
     private short value;
-    private static final short MASK12 = (short) 0xfff;
 
     public Address() {
-        set((short) 0);
-    };
-
-    public Address(short value) {
-        set(value);
+        setValue((short) 0);
     }
 
-    public short get() {
+    ;
+
+    public Address(short value) {
+        setValue(value);
+    }
+
+    public short getValue() {
         return value;
     }
 
-    public void set(short value) {
+    public void setValue(short value) {
+        if (value < 0 || value >= RAM.MEMORY_SIZE) {
+            throw new IllegalArgumentException(
+                String.format(
+                        "Address \"%d\" out of bounds",
+                        value
+                )
+            );
+        }
         this.value = (short) (value & MASK12);
     }
 }
