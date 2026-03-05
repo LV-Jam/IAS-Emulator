@@ -1,0 +1,44 @@
+LOAD M(30)         ; ADD M(31)              
+STOR M(32)         ; LOAD M(40)             
+STOR M(33)         ; LOAD M(31)             
+SUB M(32)          ; JUMP+ M(9,20:39)       
+LOAD M(33)         ; SUB M(40)              
+JUMP+ M(6,20:39)   ; LOAD M(40)             
+STOR M(33)         ; LOAD M(31)             
+ADD M(20)          ; STOR M(31)             
+STOR M(4,28:39)    ; STOR M(5,28:39)        
+JUMP M(2,20:39)    ;            
+
+
+
+
+
+
+
+
+
+
+1       
+
+
+
+
+
+
+
+
+
+4       
+40      
+0       
+0       
+
+
+
+
+
+
+-19
+-4
+-8
+-10

@@ -21,16 +21,18 @@ public class Main {
         System.out.println(args[0]);
         parseFile(args[0]);
         CPU cpu = CPU.getInstance();
-        do {
+        while(true) {
             cpu.fetchAndDecode();
             cpu.execute();
+            if (cpu.IR == null) break;
             System.out.printf(
                     "IR %d, MAR %d, IBR %s, MBR %d, AC %d, MQ %d, PC %d\n",
                     cpu.IR.opcode, cpu.MAR.getValue(), cpu.IBR, cpu.MBR.getValue(),
                     cpu.AC, cpu.MQ, cpu.PC
             );
             System.out.println(Arrays.toString(RAM.getInstance().getArray()));
-        } while (cpu.IR != null);
+        }
+        System.out.println("Program terminated");
     }
 
     public static void parseFile(String path) {
@@ -40,15 +42,10 @@ public class Main {
             short address = 0;
             while (address < RAM.MEMORY_SIZE && (line = br.readLine()) != null) {
                 line = line.trim();
-                if (line.isEmpty() || line.startsWith(";" )) {
-                    continue;
-                }
 
                 Word word = parseLine(line);
-                if (word != null) {
-                    ram.set(new Address(address), word);
-                    address++;
-                }
+                ram.set(new Address(address), word);
+                address++;
             }
         } catch (IOException e) {
             System.err.println("Error reading file." );
@@ -71,10 +68,6 @@ public class Main {
 
         AbstractInstruction leftInstr = parseInstruction(leftStr);
         AbstractInstruction rightInstr = parseInstruction(rightStr);
-
-        if (leftInstr == null && rightInstr == null) {
-            return null;
-        }
 
         long wordValue = 0;
 
@@ -104,7 +97,7 @@ public class Main {
 
         Symbolic symbolicType = determineSymbolic(opcode, operand);
         if (symbolicType == null) {
-            return null;
+            throw new RuntimeException("Invalid Instruction");
         }
 
         short address = -1;

@@ -17,6 +17,6 @@ public final class ADD_ABS_M_X extends AbstractInstruction {
         }
         CPU cpu = CPU.getInstance();
         RAM ram = RAM.getInstance();
-        cpu.AC += Math.abs(ram.get(getAddress()).getValue());
+        cpu.AC += Math.abs(com.architecture.Globals.sign40(ram.get(getAddress()).getValue()));
     }
 }

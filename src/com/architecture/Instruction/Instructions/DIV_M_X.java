@@ -18,8 +18,9 @@ public final class DIV_M_X extends AbstractInstruction {
         }
         CPU cpu = CPU.getInstance();
         RAM ram = RAM.getInstance();
-        long quotient = cpu.AC / ram.get(getAddress()).getValue();
-        long remainder = cpu.AC % ram.get(getAddress()).getValue();
+        long divisor = com.architecture.Globals.sign40(ram.get(getAddress()).getValue());
+        long quotient = cpu.AC / divisor;
+        long remainder = cpu.AC % divisor;
         quotient &= MASK40;
         remainder &= MASK40;
         cpu.MQ = quotient;

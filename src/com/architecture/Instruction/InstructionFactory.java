@@ -27,7 +27,6 @@ public class InstructionFactory {
                 return new STOR_M_X(address.getValue().getValue());
 			}
             case LOAD_M_X: {
-
                 return new LOAD_M_X(address.getValue().getValue());
 			}
             case LOAD_NEG_M_X: {

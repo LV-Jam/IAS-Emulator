@@ -17,6 +17,6 @@ public final class LOAD_MQ_M_X extends AbstractInstruction {
         }
         CPU cpu = CPU.getInstance();
         RAM ram = RAM.getInstance();
-        cpu.MQ = ram.get(this.getAddress()).getValue();
+        cpu.MQ = com.architecture.Globals.sign40(ram.get(this.getAddress()).getValue());
     }
 }

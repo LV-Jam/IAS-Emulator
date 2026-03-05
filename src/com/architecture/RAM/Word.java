@@ -39,6 +39,7 @@ public class Word {
                 (short) (bits & MASK12)
         ));
         Symbolic type = Globals.symbolicFromByte((byte) ((bits >>> 12) & MASK8));
+        if (type == null) return null;
         return InstructionFactory.getInstance().create(type, address);
     }
 
@@ -48,7 +49,19 @@ public class Word {
                 (short) (bits & MASK12)
         ));
         Symbolic type = Globals.symbolicFromByte((byte) ((bits >>> 12) & MASK8));
+        if (type == null) return null;
         return InstructionFactory.getInstance().create(type, address);
+    }
+
+    public void storePartial(long v, int lo, int hi) {
+        int width = hi - lo + 1;
+        if (width < 0 || width > 40) {
+            throw new IllegalArgumentException("Computed width is invalid");
+        }
+        
+        v = v & MASK40;
+        long mask = ((1L << width) - 1) << lo;
+        value = (value & ~mask) | ((v << lo) & mask);
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.architecture;
 import com.architecture.Instruction.AbstractInstruction;
 import com.architecture.Instruction.Instructions.*;
 import com.architecture.Instruction.Symbolic;
-
 import java.util.Map;
 
 public class Globals {
@@ -66,5 +65,13 @@ public class Globals {
 
     public static Symbolic symbolicFromClass(Class<? extends AbstractInstruction> c) {
         return CLASS_TO_SYMBOLIC.get(c);
+    }
+
+    public static long sign40(long value) {
+        long SIGN_BIT_40 = 0x8000000000L;
+        if ((value & SIGN_BIT_40) != 0) {
+            return value | 0xFFFFFF0000000000L;
+        }
+        return value;
     }
 }

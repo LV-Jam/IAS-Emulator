@@ -1,8 +1,8 @@
 package com.architecture.CPU;
 
 import com.architecture.Globals;
-import com.architecture.Instruction.Address;
 import com.architecture.Instruction.AbstractInstruction;
+import com.architecture.Instruction.Address;
 import com.architecture.Instruction.InstructionFactory;
 import com.architecture.Instruction.Symbolic;
 import com.architecture.Nullable;
@@ -40,19 +40,30 @@ public class CPU {
     public void fetchAndDecode() {
         MAR = new Address(PC);
         MBR = ram.get(MAR);
+        if (MBR == null) {
+            IR = null;
+            return;
+        }
         if (IBR == null) {
-            IBR = MBR.getRight();
             AbstractInstruction left = MBR.getLeft();
+            if (left == null) {
+                IR = null;
+                return;
+            }
+            IBR = MBR.getRight();
             IR = Globals.symbolicFromClass(left.getClass());
             MAR = left.getAddress();
         } else {
             IR = Globals.symbolicFromClass(IBR.getClass());
             MAR = IBR.getAddress();
+            IBR = null; //Emptying IBR
+
             PC++;
         }
     }
 
     public void execute() {
+        if (IR == null) return;
         InstructionFactory
                 .getInstance()
                 .create(IR, new Nullable<>(MAR))

@@ -17,6 +17,6 @@ public final class ADD_M_X extends AbstractInstruction {
         }
         CPU cpu = CPU.getInstance();
         RAM ram = RAM.getInstance();
-        cpu.AC += ram.get(getAddress()).getValue();
+        cpu.AC += com.architecture.Globals.sign40(ram.get(getAddress()).getValue());
     }
 }

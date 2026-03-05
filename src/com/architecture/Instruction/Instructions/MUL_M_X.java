@@ -19,7 +19,7 @@ public final class MUL_M_X extends AbstractInstruction {
         }
         CPU cpu = CPU.getInstance();
         RAM ram = RAM.getInstance();
-        long product = cpu.MQ * ram.get(getAddress()).getValue();
+        long product = cpu.MQ * com.architecture.Globals.sign40(ram.get(getAddress()).getValue());
         product &= MASK40;
         cpu.MQ = ((product) & MASK20);
         cpu.AC = ((product >>> 20) & MASK20);
